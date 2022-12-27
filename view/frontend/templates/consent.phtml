@@ -1,0 +1,40 @@
+<?php
+$count = 0;
+$consentPage = $block->getConsentCheckboxData();
+foreach ($consentPage as $consentdata) {
+    $count++;
+    if ($consentdata == $block->getLinkType()) {
+        $consentdataVal = "Register";
+        if ($consentdata == "contactpage") {
+            $consentdataVal = "Contact";
+        } elseif ($consentdata == "newsletterform") {
+            $consentdataVal = "Subscribe";
+        }
+        ?>
+        <div class="field risecommerce_consent_checkbox required">
+            <?php if ($block->escapeHtml($block->getMsgContent())) { ?>
+            <label class="label" for="comment"><?= $block->escapeHtml($block->getMsgContent()); ?></label>
+            <?php } ?>
+            <div class="control">
+                <input type="checkbox" id="<?= $block->escapeHtmlAttr('risecommerce_consent_checkbox_' . $count) ?>"
+                       name="risecommerce_consent_checkbox"
+                       data-validate="{required:true}" class="input-checkbox checkbox required" value="1">
+                <label for="<?= $block->escapeHtmlAttr('risecommerce_consent_checkbox_' . $count) ?>" class="label">
+                    <?= $block->getConsentContent(); ?>
+                </label>
+                <input type="hidden" name="gdpr_action" id="actiontype" value="<?= /* @noEscape */ $consentdataVal;?>">
+            </div>
+        </div>
+        <script type="text/x-magento-init">
+        {
+            ".risecommerce_consent_checkbox ": {
+                "privacypolicyLink": {
+                    "privacyLink": ".risecommerce_consent_checkbox a",
+                    "subscribeUrl": "#newsletter-validate-detail .subscribe"
+                }
+            }
+        }
+        </script>
+        <?php
+    }
+}?>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">    
+   <body>     
+       <referenceContainer name="form.additional.info">
+           <block class="Risecommerce\Gdpr\Block\Consent" name="consent_contact_block" template="Risecommerce_Gdpr::consent.phtml">
+                <action method="setLinkType">
+                    <argument name="link_type" xsi:type="string">contactpage</argument>
+                </action>
+            </block>
+       </referenceContainer>
+   </body>
+</page>

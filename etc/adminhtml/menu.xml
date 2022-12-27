@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Risecommerce_Gdpr::risecommerce_gdpr_consent_history" title="GDPR Consent History" module="Risecommerce_Gdpr" sortOrder="100" parent="Magento_Customer::customer" action="gdpr/history" resource="Risecommerce_Gdpr::consent_history"/>
+        <add id="Risecommerce_Gdpr::risecommerce_gdpr_delete_account_history" title="GDPR Delete Account History" module="Risecommerce_Gdpr" sortOrder="101" parent="Magento_Customer::customer" action="gdpr/history/deleteAccount" resource="Risecommerce_Gdpr::delete_account_history"/>
+    </menu>
+</config>

@@ -1,0 +1,23 @@
+<?php
+$data = $this->getData('reuestdata');
+if (!empty($data['status'])):
+    ?>
+    <?php if ($data['status'] == "Rejected"): ?>
+    <p><?= /* @noEscape */
+        __('Thanks for your patience while we reviewed your request for account deletion. This is in reference that your request for account deletion is ') ?>
+        <strong><?= /* @noEscape */
+            __('rejected.'); ?></strong></p>
+    <p><?= /* @noEscape */
+        __('Unfortunately we can\'t delete your account at the moment due to below ') ?><strong><?= /* @noEscape */
+            __('reason:'); ?></strong></p>
+    <p><?= /* @noEscape */
+        nl2br($data['admin_reason']) ?></p>
+<?php endif ?>
+    <?php if ($data['status'] == "Accepted"): ?>
+    <p><?= /* @noEscape */
+        __('We have received your request for account deletion and based on that, ') ?><strong><?= /* @noEscape */
+            __('your account is deleted permanently.'); ?></strong></p>
+    <p><?= /* @noEscape */
+        __('We\'re sorry to see you go and hoping you to be back again.') ?></p>
+<?php endif ?>
+<?php endif; ?>

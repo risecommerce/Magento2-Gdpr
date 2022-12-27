@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="risecommerce" translate="label" sortOrder="500">
+            <label>Risecommerce</label>
+        </tab>
+        <section id="gdpr" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>GDPR</label>
+            <tab>risecommerce</tab>
+            <resource>Risecommerce_Gdpr::gdpr</resource>
+            <group id="cookie" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cookie Policy </label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="customer" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Customer Policy</label>
+                <field id="allow_customer_to_delete_account" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Allow customer to delete account</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="order_status" translate="label" type="multiselect" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Statuses for which account deletion is allowed</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                    <depends>
+                        <field id="allow_customer_to_delete_account">1</field>
+                    </depends>
+                </field>
+                <field id="customer_account_delete_also_delete" translate="Module" type="multiselect" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>When customer delete account, also delete</label>
+                    <source_model>\Risecommerce\Gdpr\Model\Config\Source\CustomerConfigOption</source_model>
+                    <comment>Deleting order will also remove related Invoices, Shipments and Creditmemos</comment>
+                    <can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="allow_customer_to_delete_account">1</field>
+                    </depends>
+                </field>
+                <field id="account_deletion_request_email_template" translate="label comment" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Template for customer account deletion request</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="allow_customer_to_delete_account">1</field>
+                    </depends>
+                </field>
+                <field id="account_deletion_response_email_template" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Template for customer account deletion response</label>
+                    <comment>Email template chosen based on theme fallback when "Default" option is selected.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="allow_customer_to_delete_account">1</field>
+                    </depends>
+                </field>
+                <field id="delete_account_warning_message" translate="label comment" type="textarea" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Delete Account warning Message</label>
+                    <depends>
+                        <field id="allow_customer_to_delete_account">1</field>
+                    </depends>
+                </field>
+                <field id="allow_customer_to_anonymous_account" translate="label comment" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Allow customer to anonymous their account</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="anonymous_order_status" translate="label" type="multiselect" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Statuses for which account anonymisation is allowed</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                    <depends>
+                        <field id="allow_customer_to_anonymous_account">1</field>
+                    </depends>
+                </field>
+                <field id="anonymised_account_details_email_template" translate="label comment" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Template for customer anonymised account details</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="allow_customer_to_anonymous_account">1</field>
+                    </depends>
+                </field>
+                <field id="anonymous_account_warning_message" translate="label comment" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Anonymous Account warning Message</label>
+                    <depends>
+                        <field id="allow_customer_to_anonymous_account">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="consent" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Consent Checkbox</label>
+                <field id="show_consent_checkbox_in" translate="Module" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show consent checkbox in</label>
+                    <source_model>Risecommerce\Gdpr\Model\Config\Source\ConsentConfigOption</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="msg_before_checkbox" showInStore="1" showInWebsite="1" showInDefault="1" sortOrder="2" type="textarea" translate="label">
+                    <label>Message before the checkbox</label>
+                    <comment>HTML is allowed</comment>
+                </field>
+                <field id="checkbox_content" showInStore="1" showInWebsite="1" showInDefault="1" sortOrder="3" type="textarea" translate="label" canRestore="1">
+                    <label>Checkbox content</label>
+                    <comment>HTML is allowed</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

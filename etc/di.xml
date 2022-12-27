@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="gdpr_history_listing_data_source" xsi:type="string">
+                    Risecommerce\Gdpr\Model\ResourceModel\ConsentHistory\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Risecommerce\Gdpr\Model\ResourceModel\ConsentHistory\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">risecommerce_gdpr_consent_history</argument>
+            <argument name="resourceModel" xsi:type="string">Risecommerce\Gdpr\Model\ResourceModel\ConsentHistory
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="GdprHistoryGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Risecommerce\Gdpr\Model\Resource\ConsentHistory\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">GdprHistoryGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="GdprHistoryGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">
+                    Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter
+                </item>
+                <item name="fulltext" xsi:type="object">
+                    Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="gdpr_history_deleteaccount_listing_data_source" xsi:type="string">
+                    Risecommerce\Gdpr\Model\ResourceModel\DeleteAccount\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Risecommerce\Gdpr\Model\ResourceModel\DeleteAccount\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">risecommerce_gdpr_delete_account_history</argument>
+            <argument name="resourceModel" xsi:type="string">Risecommerce\Gdpr\Model\ResourceModel\DeleteAccount
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="GdprDeleteHistoryGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Risecommerce\Gdpr\Model\Resource\DeleteAccount\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">GdprHistoryGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+</config>

@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">deleteaccount_form.deleteaccount_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Risecommerce\Gdpr\Block\Adminhtml\SaveButton"/>
+            <button name="back" class="Risecommerce\Gdpr\Block\Adminhtml\BackButton"/>
+        </buttons>
+        <namespace>deleteaccount_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>deleteaccount_form.deleteaccount_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="deleteaccount_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="gdpr/history/save"/>
+        </settings>
+        <dataProvider class="Risecommerce\Gdpr\Ui\Component\DataProvider\DeleteAccount" name="deleteaccount_form_data_source">
+            <settings>
+                <requestFieldName>account_id</requestFieldName>
+                <primaryFieldName>account_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="deleteaccount">
+        <settings>
+            <level>1</level>
+            <label/>
+        </settings>
+        <!-- This field represents form id and is hidden -->
+
+        <field name="account_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">account_id</item>
+                    <item name="source" xsi:type="string">deleteaccount</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Customer Name</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">deleteaccount</item>
+                    <item name="dataScope" xsi:type="string">name</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Customer Email</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">deleteaccount</item>
+                    <item name="dataScope" xsi:type="string">email</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="customer_reason">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Reason for delete their account</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">deleteaccount</item>
+                    <item name="dataScope" xsi:type="string">customer_reason</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- This field has data type 'text' and standard 'input' form element and looks like input -->
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Risecommerce\Gdpr\Model\DeleteAccount\Source\Action</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Action</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">deleteaccount</item>
+                    <item name="sortOrder" xsi:type="number">220</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>Rejected</value>
+                            <actions>
+                                <action name="0">
+                                    <target>deleteaccount_form.deleteaccount_form.deleteaccount.admin_reason</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>Accepted</value>
+                            <actions>
+                                <action name="0">
+                                    <target>deleteaccount_form.deleteaccount_form.deleteaccount.admin_reason</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
+            </settings>
+        </field>
+
+        <field name="admin_reason">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Reason for accept or reject request</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">deleteaccount</item>
+                    <item name="dataScope" xsi:type="string">admin_reason</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+
+</form>

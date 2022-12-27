@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="risecommerce_gdpr_consent_history" resource="default" engine="innodb" comment="Consent History">
+        <column xsi:type="smallint" name="consent_id" nullable="false" identity="true" comment="Consent ID"/>
+        <column xsi:type="varchar" name="name" length="255" comment="Customer Name"/>
+        <column xsi:type="varchar" name="email" length="255" nullable="false" comment="Customer Email"/>
+        <column xsi:type="varchar" name="action" length="255" nullable="false" comment="Action"/>
+        <column xsi:type="varchar" name="ip_address" length="255" nullable="false" comment="Ip Address"/>
+        <column xsi:type="timestamp" name="creation_time" nullable="false" default="CURRENT_TIMESTAMP" comment="Log time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="consent_id"/>
+        </constraint>
+        <index referenceId="RISECOMMERCE_GDPR_CONSENT_HISTORY_FULLTEXT" indexType="fulltext">
+            <column name="name"/>
+            <column name="email"/>
+            <column name="ip_address"/>
+            <column name="action"/>
+        </index>
+    </table>
+
+    <table name="risecommerce_gdpr_delete_account_history" resource="default" engine="innodb" comment="Delete Account History">
+        <column xsi:type="smallint" name="account_id" nullable="false" identity="true" comment="Account ID"/>
+        <column xsi:type="smallint" name="customer_id" nullable="false" comment="Customer ID"/>
+        <column xsi:type="varchar" name="name" length="25" comment="Customer Name"/>
+        <column xsi:type="varchar" name="email" length="255" nullable="false" comment="Customer Email"/>
+        <column xsi:type="mediumtext" name="customer_reason" comment="Reason"/>
+        <column xsi:type="varchar" name="status" length="25" comment="Status"/>
+        <column xsi:type="mediumtext" name="admin_reason" comment="Reason"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="account_id"/>
+        </constraint>
+        <index referenceId="RISECOMMERCE_GDPR_DELETE_ACCOUNT_HISTORY_FULLTEXT" indexType="fulltext">
+            <column name="name"/>
+            <column name="email"/>
+        </index>
+    </table>
+
+    <table name="risecommerce_gdpr_anonymous_account_history" resource="default" engine="innodb" comment="Anonymous Account History">
+        <column xsi:type="smallint" name="anonymous_account_id" nullable="false" identity="true" comment="Anonymous Account ID"/>
+        <column xsi:type="smallint" name="customer_id" nullable="false" comment="Customer ID"/>
+        <column xsi:type="varchar" name="email" length="255" nullable="false" comment="Customer Email"/>
+        <column xsi:type="boolean" name="is_anonymous" comment="Is Anonymous"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="anonymous_account_id"/>
+        </constraint>
+        <index referenceId="RISECOMMERCE_GDPR_ANONYMOUS_ACCOUNT_HISTORY_FULLTEXT" indexType="fulltext">
+            <column name="email"/>
+        </index>
+    </table>
+</schema>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="cookie_notices">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Risecommerce_Gdpr::cookies.phtml</argument>
+            </action>
+        </referenceBlock>
+        <block class="Risecommerce\Gdpr\Block\Consent" name="consent_newsletter_block"
+               template="Risecommerce_Gdpr::consent.phtml">
+            <action method="setLinkType">
+                <argument name="link_type" xsi:type="string">newsletterform</argument>
+            </action>
+        </block>
+        <move element="consent_newsletter_block" destination="footer" after="form.subscribe"/>
+    </body>
+</page>

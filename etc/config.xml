@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <gdpr>
+            <cookie>
+                <enabled>1</enabled>
+            </cookie>
+            <customer>
+                <allow_customer_to_delete_account>0</allow_customer_to_delete_account>
+                <order_status>complete,closed,canceled</order_status>
+                <customer_account_delete_also_delete>newsletter</customer_account_delete_also_delete>
+                <account_deletion_request_email_template>gdpr_customer_account_deletion_request_email_template</account_deletion_request_email_template>
+                <account_deletion_response_email_template>gdpr_customer_account_deletion_response_email_template</account_deletion_response_email_template>
+                <delete_account_warning_message>Please make sure that Your Account will be permanently deleted. Once you delete your account, It cannot be recovered.</delete_account_warning_message>
+                <allow_customer_to_anonymous_account>1</allow_customer_to_anonymous_account>
+                <anonymous_order_status>complete,closed,canceled</anonymous_order_status>
+                <anonymised_account_details_email_template>gdpr_customer_anonymised_account_details_email_template</anonymised_account_details_email_template>
+                <anonymous_account_warning_message>Anonymising your acccount will replace your personal data with non-personal information. You will receive new login and password to your email address to be used from now onwards.</anonymous_account_warning_message>
+            </customer>
+            <consent>
+                <show_consent_checkbox_in>registrationpage,contactpage,newsletterform</show_consent_checkbox_in>
+                <checkbox_content><![CDATA[I read and agree <a href="/privacy-policy-cookie-restriction-mode">Privacy Policy</a>]]></checkbox_content>
+            </consent>
+        </gdpr>
+    </default>
+</config>

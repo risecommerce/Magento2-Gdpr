@@ -1,0 +1,17 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{var data.subject}} @-->
+<!--@vars {
+"var data.status":"status",
+"var data.admin_reason":"reason for accepting or rejecting your request",
+"var data.name":"Customer Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+<p>{{trans "Hello %name," name=$data.name}}</p>
+{{block class='Magento\\Framework\\View\\Element\\Template' area='frontend' template='Risecommerce_Gdpr::email/deleteaccount.phtml' reuestdata=$data}}<br/>
+{{template config_path="design/email/footer_template"}}

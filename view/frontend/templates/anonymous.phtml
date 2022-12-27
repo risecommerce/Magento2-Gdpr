@@ -1,0 +1,110 @@
+<?php
+$helper = $this->helper(\Risecommerce\Gdpr\Helper\Data::class);
+?>
+<!-- Annonymous Account -->
+<div class="block block-dashboard-anonymous">
+    <div class="block-title"><strong><?= $block->escapeHtml(__('Anonymous Account')) ?></strong></div>
+    <div>
+        <button type="button" class="risecommerce-confirm-anonymous-account" title="submit">
+            <?= $block->escapeHtml(__('Confirm')) ?>
+        </button>
+    </div>
+</div>
+<!-- Anonymous Account -->
+<div id="risecommerce-popup-modal-anonymous-account" style="display:none;">
+    <div id="result-message-anonymous" class="message-validation message" style="display: none"></div>
+    <form class="form" action="<?= $block->escapeHtml($block->getUrl('gdpr/customer/Anonymous')); ?>" method="post"
+          id="form-validate-anonymous-account" enctype="multipart/form-data" autocomplete="off"
+          data-mage-init='{"validation":{}}'
+          data-hasrequired="<?= /* @noEscape */
+          __('* Required Fields') ?>">
+        <fieldset class="fieldset">
+            <div class="field risecommerce-account-warning">
+                <label class="label">
+                    <span>
+                        <?= $block->escapeHtml($helper->getCustomerConfig('anonymous_account_warning_message')) ?>
+                    </span>
+                </label>
+            </div>
+            <div class="field current required risecommerce-password">
+                <label class="label"
+                       for="current-password"><span><?= $block->escapeHtml(__('Current Password')) ?></span></label>
+                <div class="control">
+                    <input type="password" class="input-text" name="current_password_anonymous" id="current-password"
+                           data-input="current-password-anonymous" autocomplete="off" data-validate="{required:true}"/>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal',
+            'mage/validation'
+        ],
+        function (
+            $,
+            modal
+        ) {
+            $('#form-validate-anonymous-account').submit(function (e) {
+                e.preventDefault();
+                $('.anonymous-submit').click();
+            });
+
+            var optionsanonymous = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Anonymous Account',
+                buttons: [{
+                    text: $.mage.__('submit'),
+                    class: 'anonymous-submit',
+                    click: function (data) {
+                        if ($('#form-validate-anonymous-account').valid()) {
+                            var form_data = jQuery("#form-validate-anonymous-account").serialize();
+                            jQuery.ajax({
+                                url: "<?= $block->escapeUrl($block->getBaseUrl()) . 'gdpr/customer/Anonymous';?>",
+                                type: 'POST',
+                                data: form_data,
+                                showLoader: true,
+                                success: function (data) {
+                                    if (data.status) {
+                                        jQuery('#result-message-anonymous').html('<div>' + data.message + '</div>');
+                                        jQuery('#result-message-anonymous').removeClass('error').removeClass('message-error');
+                                        jQuery('#result-message-anonymous').addClass('success').addClass('message-success');
+                                        jQuery('#result-message-anonymous').show();
+                                        window.location.href = "<?= $block->escapeUrl($block->getBaseUrl()) . 'customer/account/logoutsuccess';?>";
+                                        setTimeout(function () {
+                                            jQuery("#risecommerce-popup-modal-delete-account").modal("closeModal");
+                                        }, 3000);
+                                    } else {
+                                        jQuery('#result-message-anonymous').html('<div>' + data.message + '</div>');
+                                        jQuery('#result-message-anonymous').removeClass('success').removeClass('message-success');
+                                        jQuery('#result-message-anonymous').addClass('error').addClass('message-error');
+                                        jQuery('#result-message-anonymous').show();
+                                    }
+                                },
+                                error: function (data) {
+                                    msg = '<?=  $block->escapeHtml(__("Something went wrong. Please try again later.")) ?>';
+                                    jQuery('#result-message-anonymous').html('<div>' + msg + '</div>');
+                                    jQuery('#result-message-anonymous').removeClass('success').removeClass('message-success');
+                                    jQuery('#result-message-anonymous').addClass('error').addClass('message-error');
+                                    jQuery('#result-message-anonymous').show();
+                                }
+                            });
+                        }
+
+                    }
+                }]
+            };
+
+            var popup = modal(optionsanonymous, $('#risecommerce-popup-modal-anonymous-account'));
+            $(".risecommerce-confirm-anonymous-account").on('click', function () {
+                $("#risecommerce-popup-modal-anonymous-account").modal("openModal");
+            });
+
+        }
+    );
+</script>

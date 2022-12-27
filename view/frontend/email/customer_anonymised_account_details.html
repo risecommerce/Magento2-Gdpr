@@ -1,0 +1,27 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Your account is anonymised"}} @-->
+<!--@vars {
+"var email":"Customer Email",
+"var password":"Customer Password",
+"var name":"Customer Name"
+} @-->
+{{template config_path="design/email/header_template"}}
+<p>{{trans "Hello %name," name=$data.name}}</p>
+<p>{{trans "In response to your recent request, your account is anonymised."}}</p>
+<p>{{trans "To login, please use the below email-address and password from now onwards:"}}</p>
+<table class="message-details">
+    <tr>
+        <td><strong>{{trans "Email"}}:</strong></td>
+        <td>{{var email}}</td>
+    </tr>
+    <tr>
+        <td><strong>{{trans "Password"}}:</strong></td>
+        <td>{{var password}}</td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}
