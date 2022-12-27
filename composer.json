@@ -2,10 +2,30 @@
     "name": "risecommerce/magento-2-gdpr-extension",
     "description": "Risecommerce GDPR Extension for Magento 2",
     "type": "magento2-module",
-    "version": "1.3.0",
-    "license": "OSL-3.0",
+    "version": "1.0.1",
+    "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+    "authors": [
+    {
+      "name": "Risecommerce",
+      "email": "support@risecommerce.com",
+      "homepage": "https://www.risecommerce.com",
+      "role": "Technical Support"
+    }
+  ],
+    "minimum-stability": "dev", 
+  "keywords": [
+    "magento 2",
+    "magento2 gdpr",
+    "magento cookies related",
+    "magento general data protection regulation",
+    "risecommerce"
+  ],
     "require": {
-        "php": "~7.0.13|~7.1.0|~7.2.0|~7.3.0|~7.4.0|^8.0"
+        "php": "~7.0.13|~7.1.0|~7.2.0|~7.3.0|~7.4.0|~8.1|^8.1"
+
     },
     "autoload": {
         "files": [
