@@ -18,6 +18,7 @@ Method II)
 Using Composer
 
 composer require risecommerce/magento-2-gdpr-extension:1.0.1
+
 #Enable Extension:
 - php bin/magento module:enable Risecommerce_Gdpr
 - php bin/magento setup:upgrade
